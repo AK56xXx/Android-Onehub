@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Onehub</string>
+
+    <array name="roles">
+        <item>Employee</item>
+        <item>Admin</item>
+    </array>
+</resources>
