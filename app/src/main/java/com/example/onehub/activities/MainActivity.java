@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.onehub.R;
+import com.example.onehub.models.Chat;
+import com.example.onehub.models.ChatDB;
 import com.example.onehub.models.User;
 import com.example.onehub.models.UserDB;
 

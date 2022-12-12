@@ -29,6 +29,11 @@ public class Chat {
         this.date = date;
     }
 
+    public Chat(int id_user, String msg) {
+        this.id_user = id_user;
+        this.msg = msg;
+    }
+
     public Chat(String msg, String date) {
         this.msg = msg;
         this.date = date;

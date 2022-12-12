@@ -56,7 +56,8 @@ public class Home extends AppCompatActivity {
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Home.this,ChatActivity.class);
+                Intent i = new Intent(Home.this,ListChatActivity.class);
+                i.putExtra("key",userID);
                 startActivity(i);
             }
         });
