@@ -18,6 +18,7 @@ public class AdminPanel extends AppCompatActivity {
 
     TextView idx ;
     Button btnMngUsers;
+    Button btnMngPosts;
 
 
     @Override
@@ -41,6 +42,20 @@ public class AdminPanel extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        btnMngPosts = (Button) findViewById(R.id.mngPosts);
+        btnMngPosts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(AdminPanel.this, ManagePostsActivity.class);
+                i.putExtra("key", adminID);
+                startActivity(i);
+
+            }
+        });
+
+
 
 
 

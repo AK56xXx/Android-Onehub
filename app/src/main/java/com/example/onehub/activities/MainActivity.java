@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.onehub.R;
 import com.example.onehub.models.Chat;
 import com.example.onehub.models.ChatDB;
+import com.example.onehub.models.PostDB;
 import com.example.onehub.models.User;
 import com.example.onehub.models.UserDB;
 
@@ -21,6 +22,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     UserDB db = new UserDB(this);
+    ChatDB cdb = new ChatDB(this);
+    PostDB pdb = new PostDB(this);
     EditText tusername;
     EditText tpass;
     Button connect;
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         if(db.CheckUserExit("admin") == false)
         {
             db.addUser(new User("admin","admin","admin"));
+
         }
 
 

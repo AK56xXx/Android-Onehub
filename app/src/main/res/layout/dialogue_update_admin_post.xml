@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ManagePostsActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="Update Post"
+            android:textAlignment="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+        <EditText
+            android:id="@+id/subject_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Subject" />
+
+        <EditText
+            android:id="@+id/message_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Text" />
+
+
+        <Button
+            android:id="@+id/btnUpdatePost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update Post" />
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

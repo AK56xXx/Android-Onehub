@@ -16,26 +16,27 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatDB extends SQLiteOpenHelper{
+public class PostDB extends SQLiteOpenHelper{
 
 
     private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "onehub";
-    private static final String TABLE_CHAT = "chat";
+    private static final String TABLE_POST = "posts";
     private static final String ID = "id";
+    private static final String SUBJECT = "sujet";
+    private static final String MESSAGE = "post_msg";
     private static final String ID_USER = "id_user";
-    private static final String MESSAGE = "msg";
     private static final String POSTED_AT = "posted_at";
-    private static final String REQUETE_CREATION_BD = "create table "+ TABLE_CHAT + " ( " + ID + " integer primary key autoincrement, " + ID_USER + " integer , " + MESSAGE + " TEXT ," + POSTED_AT + " TEXT , foreign key (id_user) references id (user) );";
+    private static final String REQUETE_CREATION_BD = "create table "+ TABLE_POST + " ( " + ID + " integer primary key autoincrement, " + SUBJECT + " TEXT ,"+ MESSAGE + " TEXT ," + ID_USER + " integer , "+ POSTED_AT + " TEXT , foreign key (id_user) references id (user) );";
 
 
 
 
-    public ChatDB(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public PostDB(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
-    public ChatDB(@Nullable Context context) {
+    public PostDB(@Nullable Context context) {
         super(context, DATABASE_NAME,null,DATABASE_VERSION );
     }
 
@@ -48,7 +49,7 @@ public class ChatDB extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(@NonNull SQLiteDatabase db, int i, int i1) {
         // Drop older table if existed
-        db.execSQL(" DROP TABLE IF EXISTS " + TABLE_CHAT + ";");
+        db.execSQL(" DROP TABLE IF EXISTS " + TABLE_POST + ";");
         // Create tables again
         onCreate(db);
 
@@ -56,45 +57,48 @@ public class ChatDB extends SQLiteOpenHelper{
 
 
 
-    public void addMessage(Chat chat) {
+    public void addPost(Post post) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
-        values.put(ID_USER, chat.getId_user());
-        values.put(MESSAGE, chat.getMsg());
-        values.put(POSTED_AT, chat.getDate());
+        values.put(ID_USER, post.getUser_id());
+        values.put(SUBJECT, post.getTitre());
+        values.put(MESSAGE, post.getPost_msg());
+        values.put(POSTED_AT,post.getDate());
 
 
 
         // Inserting Row
-        db.insert(TABLE_CHAT, null, values);
+        db.insert(TABLE_POST, null, values);
         //2nd argument is String containing nullColumnHack
 
 
         db.close(); // Closing database connection
     }
 
-    public int updateMessage(Chat chat) {
+    public int updatePost(Post post) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(ID_USER, chat.getId_user());
-        values.put(MESSAGE, chat.getMsg());
-        values.put(POSTED_AT, chat.getDate());
+
+        values.put(ID_USER, post.getUser_id());
+        values.put(SUBJECT, post.getTitre());
+        values.put(MESSAGE, post.getPost_msg());
+        values.put(POSTED_AT,post.getDate());
 
         // updating row
-        return db.update(TABLE_CHAT, values, ID + " = ?",
-                new String[] { String.valueOf(chat.getId()) });
+        return db.update(TABLE_POST, values, ID + " = ?",
+                new String[] { String.valueOf(post.getId()) });
     }
 
 
 
 
-    public void deleteMessage(Chat chat) {
+    public void deletePost(Post post) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_CHAT, ID + " = ?",
-                new String[] { String.valueOf(chat.getId()) });
+        db.delete(TABLE_POST, ID + " = ?",
+                new String[] { String.valueOf(post.getId()) });
         db.close();
     }
 
@@ -117,10 +121,10 @@ public class ChatDB extends SQLiteOpenHelper{
 
     }*/
 
-    public List<Chat> getAllChat() {
-        List<Chat> chatList = new ArrayList<Chat>();
+    public List<Post> getAllPosts() {
+        List<Post> postList = new ArrayList<Post>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_CHAT;
+        String selectQuery = "SELECT  * FROM " + TABLE_POST;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -128,22 +132,23 @@ public class ChatDB extends SQLiteOpenHelper{
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Chat chat = new Chat();
+                Post post = new Post();
 
-                chat.setId(Integer.parseInt(cursor.getString(0)));
-                chat.setId_user(Integer.parseInt(cursor.getString(1)));
-                chat.setMsg(cursor.getString(2));
-                chat.setDate(cursor.getString(3));
+                post.setId(Integer.parseInt(cursor.getString(0)));
+                post.setTitre(cursor.getString(1));
+                post.setPost_msg(cursor.getString(2));
+                post.setUser_id(Integer.parseInt(cursor.getString(3)));
+                post.setDate(cursor.getString(4));
 
 
 
                 // Adding user to list
-                chatList.add(chat);
+                postList.add(post);
             } while (cursor.moveToNext());
         }
 
-        // return contact list
-        return chatList;
+        // return post list
+        return postList;
     }
 
 

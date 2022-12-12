@@ -13,6 +13,20 @@
         android:theme="@style/Theme.Onehub"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ManagePostsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.AdminListPosts"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activities.ListChatActivity"
             android:exported="false">
             <meta-data
@@ -20,7 +34,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.ChatActivity"
+            android:name=".activities.ListPostsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

@@ -48,7 +48,8 @@ public class Home extends AppCompatActivity {
         home_posts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Home.this,Home_posts.class);
+                Intent i = new Intent(Home.this,ListPostsActivity.class);
+                i.putExtra("key",userID);
                 startActivity(i);
             }
         });
