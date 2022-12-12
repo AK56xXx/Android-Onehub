@@ -13,8 +13,13 @@ public class User {
     private String role;
     private int blocked;
     private int attempts;
+    private User user;
 
     public User() {
+    }
+    public User(User user)
+    {
+        this.user = user;
     }
 
     public User(int id) {
